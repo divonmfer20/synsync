@@ -14,6 +14,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="fc:miniapp" content="&lt;stringified MiniAppEmbed JSON&gt;" />
+        {/* For backward compatibility */}
+        <meta name="fc:frame" content="&lt;stringified MiniAppEmbed JSON&gt;" />
+      </head>
       <body>{children}</body>
     </html>
   )
