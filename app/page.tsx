@@ -9,6 +9,7 @@ import { ChatSystem } from "@/components/chat-system"
 import { PermissionScreen } from "@/components/permission-screen"
 import { MoodStatus } from "@/components/mood-status"
 import { BioManager } from "@/components/bio-manager"
+import { sdk } from "@farcaster/miniapp-sdk"
 
 // Mock current user
 const currentUser = {
@@ -141,6 +142,13 @@ export default function SignSyncApp() {
     window.addEventListener("message", handleMessage)
     return () => window.removeEventListener("message", handleMessage)
   }, [])
+
+  // Notify Farcaster Miniapp SDK that the app is ready
+  useEffect(() => {
+    if (grantedPermissions.length > 0) {
+      sdk.actions.ready()
+    }
+  }, [grantedPermissions])
 
   // Show permission screen first - MANDATORY
   if (grantedPermissions.length === 0) {
